@@ -5,11 +5,10 @@ body {
 }
 
 .bg {
-    background: rgb(147, 206, 222);
-    background: -moz-linear-gradient(top, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
-    background: -webkit-linear-gradient(top, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
-    background: linear-gradient(to bottom, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=0);
+    background-image: url('../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .main-headline h1 {
@@ -19,6 +18,14 @@ body {
     font-size: 5em;
 }
 
+.panel {
+    border-color: #78D525;
+    box-shadow: 5px 5px 20px black;
+}
+
+.panel-primary .panel-heading {
+    background-color: #78D525;
+}
 .panel-footer {
     padding-top: 5px;
 }
@@ -29,5 +36,5 @@ table {
 #gameRow2 td,
 #gameRow3 td {
     border: 2px solid red;
-    padding: 75px;
+    padding: 25px;
 }
