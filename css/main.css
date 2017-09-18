@@ -4,6 +4,16 @@ body {
     width: 100%;
 }
 
+@font-face {
+    font-family: rock;
+    src: url('../assets/fonts/JFRocOut.ttf');
+}
+
+@font-face {
+    font-family: preRock;
+    src: url('../assets/fonts/Prehistoric_Caveman.ttf');
+}
+
 .bg {
     background-image: url('../assets/background.jpg');
     background-size: cover;
@@ -26,15 +36,60 @@ body {
 .panel-primary .panel-heading {
     background-color: #78D525;
 }
+
 .panel-footer {
     padding-top: 5px;
 }
+
 table {
     margin: 0 auto;
 }
+
 #gameRow1 td,
 #gameRow2 td,
 #gameRow3 td {
-    border: 2px solid red;
+    border: 3px solid brown;
     padding: 25px;
+}
+
+#gameRow1 td:hover,
+#gameRow2 td:hover,
+#gameRow3 td:hover {
+    background-color: rgba(250, 222, 122, 085);
+    cursor: pointer;
+}
+
+.subHeader {
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    font-size: 1.5em;
+    line-height: 250%;
+    font-weight: 900;
+    color: white;
+    font-family: 'preRock';
+}
+
+.infoSection {
+    padding-top: 50px;
+}
+
+ul {
+    list-style: none;
+}
+
+.modal-header {
+    background-color: #78D525;
+    font-family: preRock;
+}
+
+.modal-header h3 {
+    font-size: 1.5em;
+    line-height: 250%;
+    font-weight: 900;
+    color: white;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.playerName {
+    font-family: preRock;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }

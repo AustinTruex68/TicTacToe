@@ -24,7 +24,7 @@
                                 <img src="assets/caveMan.png" alt="caveman" class="img-responsive">
                             </div>
                             <div class="col-xs-6 text-center">
-                                <h2>Caveman vs Dinosaur</h2>
+                                <h2 class="subHeader">Caveman vs Dinosaur</h2>
                             </div>
                             <div class="col-xs-3 text-right">
                                 <img src="assets/dinosaur.png" alt="dinosaur" class="img-responsive">
@@ -35,21 +35,44 @@
                         <div id="playBoard">
                             <table>
                                 <tr id="gameRow1">
-                                    <td><span class="gamePiece"><img src="assets/xPiece.png" alt=""></span></td>
+                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
                                     <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/xPiece.png" alt=""></span></td>
+                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
                                 </tr>
                                 <tr id="gameRow2">
                                     <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
                                     <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/xPiece.png" alt=""></span></td>
+                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
                                 </tr>
                                 <tr id="gameRow3">
-                                    <td><span class="gamePiece"><img src="assets/xPiece.png" alt=""></span></td>
+                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
                                     <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/xPiece.png" alt=""></span></td>
+                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
                                 </tr>
                             </table>
+                        </div>
+                        <div class="row infoSection">
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#teamSelect">Open Modal</button>
+                            <div class="col-xs-6 text-center">
+                                <img style="margin: 0 auto;" src="https://placehold.it/100x100" class="img-responsive" alt="">
+                                <h3><strong>Team (Your team)</strong></h3>
+                                <hr>
+                                <ul>
+                                    <li>Moves: 0</li>
+                                    <li>Wins: 0</li>
+                                    <li>Losses: 0</li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6 text-center">
+                                <img style="margin: 0 auto;" src="https://placehold.it/100x100" class="img-responsive" alt="">
+                                <h3><strong>Team (other team)</strong></h3>
+                                <hr>
+                                <ul>
+                                    <li>Moves: </li>
+                                    <li>Wins:</li>
+                                    <li>Losses:</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-footer">
@@ -71,5 +94,75 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
+<!-- team select modal -->
+<div class="modal fade" id="teamSelect" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title text-center">SELECT YOUR TEAM TO GET STARTED!</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading playerName text-center">
+                                <h4>CAVEMAN</h4>
+                            </div>
+                            <img src="assets/caveMan.png" alt="" class="img-responsive">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4>PROS</h4>
+                                    <ul>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4>CONS</h4>
+                                    <ul>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading playerName text-center">
+                                <h4>DINOSAUR</h4>
+                            </div>
+                            <img src="assets/dinosaur.png" alt="" class="img-responsive">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4>PROS</h4>
+                                    <ul>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4>CONS</h4>
+                                    <ul>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                        <li>Something</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </html>
