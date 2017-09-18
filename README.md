@@ -1,2 +1,2 @@
 # TicTacToe
-TicTacToe game built in jQuery
+TicTacToe game built in jQuery!
