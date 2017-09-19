@@ -19,6 +19,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .main-headline h1 {
@@ -92,4 +93,45 @@ ul {
 .playerName {
     font-family: preRock;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.characterInfoHeaders {
+    font-size: 1em;
+    color: #78D525;
+    font-family: preRock;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+a.removeAStuff:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.removeAStuff {
+    color: inherit;
+}
+
+a.removeAStuff:hover {
+    cursor: pointer;
+}
+
+.selectedCharacter {
+    border: 8px solid yellow;
+}
+
+#submitCharacterSelect {
+    width: 300px;
+    height: 50px;
+}
+
+.teamPics {
+    max-width: 150px;
+}
+
+.cavemanTaken {
+    background-color: #D9DEA7;
+}
+
+.dinosaurTaken {
+    background-color: #7CE175;
 }

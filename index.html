@@ -2,8 +2,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TicTacToe</title>
+    <title>Caveman VS Dinosaur</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -21,7 +22,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3 text-left">
-                                <img src="assets/caveMan.png" alt="caveman" class="img-responsive">
+                                <img src="assets/caveman.png" alt="caveman" class="img-responsive">
                             </div>
                             <div class="col-xs-6 text-center">
                                 <h2 class="subHeader">Caveman vs Dinosaur</h2>
@@ -32,45 +33,47 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        <h4 class="characterInfoHeaders text-center"><span id="currentTurn"></span>'s Turn</h4>
+                        <br>
+                        <br>
                         <div id="playBoard">
-                            <table>
+                            <table id="playTable">
                                 <tr id="gameRow1">
-                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
+                                    <td id="a1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                    <td id="a2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                    <td id="a3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
                                 </tr>
                                 <tr id="gameRow2">
-                                    <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
+                                    <td id="b1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                    <td id="b2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                    <td id="b3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
                                 </tr>
                                 <tr id="gameRow3">
-                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/dinoPiece.png" alt=""></span></td>
-                                    <td><span class="gamePiece"><img src="assets/cavemanPiece.png" alt=""></span></td>
+                                    <td id="c1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                    <td id="c2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                    <td id="c3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="row infoSection">
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#teamSelect">Open Modal</button>
                             <div class="col-xs-6 text-center">
-                                <img style="margin: 0 auto;" src="https://placehold.it/100x100" class="img-responsive" alt="">
-                                <h3><strong>Team (Your team)</strong></h3>
+                                <img style="margin: 0 auto;" id="yourTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
+                                <h3><strong>Team <span id="yourTeam">(Your team)</span></strong></h3>
                                 <hr>
                                 <ul>
-                                    <li>Moves: 0</li>
-                                    <li>Wins: 0</li>
-                                    <li>Losses: 0</li>
+                                    <li>Moves: <span id="yourMoves">0</span></li>
+                                    <li>Wins: <span id="yourWins">0</span></li>
+                                    <li>Losses: <span id="yourLosses">0</span></li>
                                 </ul>
                             </div>
                             <div class="col-xs-6 text-center">
-                                <img style="margin: 0 auto;" src="https://placehold.it/100x100" class="img-responsive" alt="">
-                                <h3><strong>Team (other team)</strong></h3>
+                                <img style="margin: 0 auto;" id="enemyTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
+                                <h3><strong>Team <span id="enemyTeam">(Their team)</span></strong></h3>
                                 <hr>
                                 <ul>
-                                    <li>Moves: </li>
-                                    <li>Wins:</li>
-                                    <li>Losses:</li>
+                                    <li>Moves: <span id="enemyMoves">0</span></li>
+                                    <li>Wins:<span id="enemyWins">0</span></li>
+                                    <li>Losses:<span id="enemyLosses">0</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -91,78 +94,101 @@
             <div class="col-xs-2"></div>
         </div>
     </div>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-<!-- team select modal -->
-<div class="modal fade" id="teamSelect" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title text-center">SELECT YOUR TEAM TO GET STARTED!</h3>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading playerName text-center">
-                                <h4>CAVEMAN</h4>
-                            </div>
-                            <img src="assets/caveMan.png" alt="" class="img-responsive">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <h4>PROS</h4>
-                                    <ul>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                    </ul>
+    <!-- team select modal -->
+    <div class="modal fade" id="teamSelect" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center">SELECT YOUR TEAM TO GET STARTED!</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a id="caveManSelected" class="removeAStuff">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading playerName text-center">
+                                        <h4>CAVEMAN</h4>
+                                    </div>
+                                    <img src="assets/caveman.png" alt="" class="img-responsive">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-5 text-center">
+                                            <h4 class="characterInfoHeaders">PROS</h4>
+                                            <hr>
+                                            <p><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<strong>Race still exists</strong></p>
+                                            <p><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<strong>Badass Attire</strong></p>
+                                            <p><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<strong>Clubs double as baseball bats</strong></p>
+                                        </div>
+                                        <div class="col-xs-5 text-center">
+                                            <h4 class="characterInfoHeaders">CONS</h4>
+                                            <hr>
+                                            <p><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;<strong>Not a freaking dinosaur</strong></p>
+                                            <p><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;<strong>Smell bad</strong></p>
+                                            <p><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;<strong>Clubs don't hurt dinosaurs</strong></p>
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <h4 class="characterInfoHeaders">BIO</h4>
+                                            <hr>
+                                            <p>Cavemen were the first men. It is known that they would spend hours upon hours carving their own tic tac toe boards. They weild clubs upon the tic tac toe battlefield.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <h4>CONS</h4>
-                                    <ul>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                    </ul>
+                            </a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a id="dinosaurSelected" class="removeAStuff">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading playerName text-center">
+                                        <h4>DINOSAUR</h4>
+                                    </div>
+                                    <img src="assets/dinosaur.png" alt="" class="img-responsive">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-5 text-center">
+                                            <h4 class="characterInfoHeaders">PROS</h4>
+                                            <hr>
+                                            <p><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<strong>Is a freaking dinosaur</strong></p>
+                                            <p><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<strong>Can eat cavemen with ease</strong></p>
+                                            <p><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<strong>Big, strong</strong></p>
+                                        </div>
+                                        <div class="col-xs-5 text-center">
+                                            <h4 class="characterInfoHeaders">CONS</h4>
+                                            <hr>
+                                            <p><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;<strong>Extinct</strong></p>
+                                            <p><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;<strong>Very small arms</strong></p>
+                                            <p><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;<strong>Breaks tic tac toe board</strong></p>
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <h4 class="characterInfoHeaders">BIO</h4>
+                                            <hr>
+                                            <p>Who has not drempt of playing as a dinosaur in a tic tac toe game? I mean, these things are vicious, yet somehow my genious alowed me to harness it's power into tic tac toe... I would take advantage of this.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-xs-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading playerName text-center">
-                                <h4>DINOSAUR</h4>
-                            </div>
-                            <img src="assets/dinosaur.png" alt="" class="img-responsive">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <h4>PROS</h4>
-                                    <ul>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                    </ul>
-                                </div>
-                                <div class="col-xs-6">
-                                    <h4>CONS</h4>
-                                    <ul>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                        <li>Something</li>
-                                    </ul>
-                                </div>
-                            </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button type="button" class="btn btn-success disabled" id="submitCharacterSelect" data-dismiss="modal">SELECT!</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
         </div>
     </div>
-</div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
 
 </html>
