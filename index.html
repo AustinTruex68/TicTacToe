@@ -62,6 +62,7 @@
                                 <hr>
                                 <ul>
                                     <li>Moves: <span id="yourMoves">0</span></li>
+                                    <li>All Moves: <span id="yourAllTimeMoves">0</span></li>
                                     <li>Wins: <span id="yourWins">0</span></li>
                                     <li>Losses: <span id="yourLosses">0</span></li>
                                 </ul>
@@ -72,6 +73,7 @@
                                 <hr>
                                 <ul>
                                     <li>Moves: <span id="enemyMoves">0</span></li>
+                                    <li>All Moves: <span id="enemyAllTimeMoves">0</span></li>
                                     <li>Wins:<span id="enemyWins">0</span></li>
                                     <li>Losses:<span id="enemyLosses">0</span></li>
                                 </ul>
@@ -132,7 +134,7 @@
                                         <div class="col-xs-12 text-center">
                                             <h4 class="characterInfoHeaders">BIO</h4>
                                             <hr>
-                                            <p>Cavemen were the first men. It is known that they would spend hours upon hours carving their own tic tac toe boards. They weild clubs upon the tic tac toe battlefield.</p>
+                                            <p class="characterBio">Cavemen were the first men. It is known that they would spend hours upon hours carving their own tic tac toe boards. They weild clubs upon the tic tac toe battlefield.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +169,7 @@
                                         <div class="col-xs-12 text-center">
                                             <h4 class="characterInfoHeaders">BIO</h4>
                                             <hr>
-                                            <p>Who has not drempt of playing as a dinosaur in a tic tac toe game? I mean, these things are vicious, yet somehow my genious alowed me to harness it's power into tic tac toe... I would take advantage of this.</p>
+                                            <p class="characterBio">Who has not drempt of playing as a dinosaur in a tic tac toe game? I mean, these things are vicious, yet somehow my genious alowed me to harness it's power into tic tac toe... I would take advantage of this.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -179,6 +181,26 @@
                     <div class="row">
                         <div class="col-xs-12 text-center">
                             <button type="button" class="btn btn-success disabled" id="submitCharacterSelect" data-dismiss="modal">SELECT!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- the end game/reset game modal -->
+    <div class="modal fade" id="gameReset" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center">Would you like to play again!?</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="btn-lg btn-success playAgainButts">HELL YEAH!</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button class="btn-lg btn-danger playAgainButts">No, That Sucked</button>
                         </div>
                     </div>
                 </div>

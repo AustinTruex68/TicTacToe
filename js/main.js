@@ -10,6 +10,7 @@ $(document).ready(function() {
         keyboard: false
     });
 
+
     //open character select
     $('#teamSelect').modal('show');
 
@@ -81,30 +82,58 @@ $(document).ready(function() {
         })
     });
 
-    //begin game
+    //begin game and handle game logic
     var openBoardSpots = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
     var winningCombos = [
         ['a1', 'b1', 'c1'],
-        ['a2', 'b2', 'c2']
+        ['a2', 'b2', 'c2'],
+        ['a3', 'b3', 'c3'],
+        ['a1', 'b2', 'c3'],
+        ['a3', 'b2', 'c1'],
+        ['a1', 'a2', 'a3'],
+        ['b1', 'b2', 'b3'],
+        ['c1', 'c2', 'c3']
     ]
-    var spotsTaken = [];
+    //your stats and data
+    var yourWinningComboStatus = [0, 0, 0, 0, 0, 0, 0, 0];
     var yourSpots = [];
+    var yourLastSpot = '';
+    var yourMoves = 0;
+    var yourAllTimeMoves = 0;
+    var yourWins = 0;
+    var yourLosses = 0;
+    //neutral data
+    var spotsTaken = [];
+    var winnerFound = false;
+    //enemy stats and data
+    var enemyWinningComboStatus = [0, 0, 0, 0, 0, 0, 0, 0];
     var enemySpots = [];
+    var enemyLastSpot = '';
+    var enemyMoves = 0;
+    var enemyAllTimeMoves = 0;
+    var enemyWins = 0;
+    var enemyLosses = 0;
 
     //your turn
     function yourTurnGo(turn) {
         $("#playTable td").on('click', function() {
-            console.log(turn);
-            if (turn === selectedCharacter) {
+            console.log($(this).hasClass('dinosaurTaken'));
 
+            if (turn === selectedCharacter && !$(this).hasClass('dinosaurTaken') && !$(this).hasClass('cavemanTaken')) {
                 $(this).addClass(selectedCharacter + 'Taken');
                 $(this).find('img').attr({
                     src: 'assets/' + selectedCharacter + 'Piece.png'
                 });
 
+                yourMoves++;
+                yourAllTimeMoves++;
+                $("#yourMoves").text(yourMoves);
+                $("#yourAllTimeMoves").text(yourAllTimeMoves);
+
                 turn = enemyCharacter;
                 spotsTaken.push($(this).attr('id'));
                 yourSpots.push($(this).attr('id'));
+                yourLastSpot = $(this).attr('id');
                 //remove selected from available spots
                 for (var i = 0; i < openBoardSpots.length; i++) {
                     if ($(this).attr('id') === openBoardSpots[i]) {
@@ -112,9 +141,15 @@ $(document).ready(function() {
                     }
                 }
                 $("#currentTurn").text(enemyCharacter);
-                //call enemy turn
-                checkForWinner();
-                enemyTurnGo(turn, spotsTaken);
+                //check to see if you won
+                checkForYouWinner();
+                checkForATie();
+                //delay enemy turn for dramatic effect
+                if (winnerFound === false) {
+                    setTimeout(function() {
+                        enemyTurnGo(turn, spotsTaken);
+                    }, 2000);
+                }
             }
         });
     }
@@ -126,39 +161,81 @@ $(document).ready(function() {
         $("#" + openBoardSpots[goHere]).find('img').attr({
             src: 'assets/' + enemyCharacter + 'Piece.png'
         });
+        enemyMoves++;
+        enemyAllTimeMoves++;
+        $("#enemyMoves").text(enemyMoves);
+        $("#enemyAllTimeMoves").text(enemyAllTimeMoves);
+
         spotsTaken.push(openBoardSpots[goHere]);
         enemySpots.push(openBoardSpots[goHere]);
+        enemyLastSpot = openBoardSpots[goHere];
         openBoardSpots.splice(goHere, 1);
         turn = selectedCharacter;
         $("#currentTurn").text(selectedCharacter);
-        checkForWinner();
+        checkForEnemyWinner();
+        checkForATie();
         yourTurnGo(turn);
     };
 
-    function checkForWinner() {
-        // console.log(winningCombos);
-        // console.log(yourSpots);
-        // console.log(enemySpots);
-        // var foundWinnerInYou = winningCombos[1].includes(yourSpots);
-        // console.log(yourSpots);
-        // console.log(winningCombos[1]);
-        // console.log(foundWinnerInYou);
-
-
-        for (var i = 0; i < yourSpots.length; i++) {
-            if (winningCombos[0].indexOf(yourSpots[i]) === -1) {
-                console.log("false");
-            } else {
-                console.log("tre");
+    //check if you won function
+    function checkForYouWinner() {
+        for (var x = 0; x < winningCombos.length; x++) {
+            if (winningCombos[x].includes(yourLastSpot)) {
+                yourWinningComboStatus[x] = yourWinningComboStatus[x] + 1;
+                if (yourWinningComboStatus[x] === 3) {
+                    alert('YOU WON');
+                    yourWins++;
+                    $("#yourWins").text(yourWins);
+                    yourMoves = 0;
+                    enemyLosses++;
+                    $("#enemyLosses").text(enemyLosses);
+                    winnerFound = true;
+                    setTimeout(function() {
+                        endGame();
+                    }, 2000);
+                }
             }
         }
-
-
-        // for(var i =0; i < winningCombos.length; i ++){
-        //     if ($.inArray(yourSpots, winningCombos)) {
-        //         console.log();
-        //     }
-        // }
     };
 
+    //check if the enemy won function
+    function checkForEnemyWinner() {
+        for (var x = 0; x < winningCombos.length; x++) {
+            if (winningCombos[x].includes(enemyLastSpot)) {
+                enemyWinningComboStatus[x] = enemyWinningComboStatus[x] + 1;
+                if (enemyWinningComboStatus[x] === 3) {
+                    alert('ENEMY WON');
+                    enemyWins++;
+                    $("#enemyWins").text(enemyWins);
+                    enemyMoves = 0;
+                    yourLosses++;
+                    $("#yourLosses").text(yourLosses);
+                    winnerFound = true;
+                    setTimeout(function() {
+                        endGame();
+                    }, 2000);
+
+                }
+            }
+        }
+    };
+
+    function checkForATie() {
+        if (openBoardSpots.length === 0 && winnerFound === false) {
+            winnerFound = true;
+            alert('wow... the cat won.. really?');
+            enemyMoves = 0;
+            yourMoves = 0;
+        }
+    }
+
+    //stop game and reset if wanted
+    function endGame() {
+        // openBoardSpots = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
+        $('#gameReset').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $('#gameReset').modal('show');
+    }
 });

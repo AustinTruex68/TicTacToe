@@ -135,3 +135,14 @@ a.removeAStuff:hover {
 .dinosaurTaken {
     background-color: #7CE175;
 }
+
+.characterBio {
+    padding: 10px;
+}
+
+.playAgainButts {
+    width: 90%;
+    height: 100px;
+    font-family: preRock;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
