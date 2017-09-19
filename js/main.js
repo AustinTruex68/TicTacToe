@@ -231,7 +231,20 @@ $(document).ready(function() {
 
     //stop game and reset if wanted
     function endGame() {
-        // openBoardSpots = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
+        openBoardSpots = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
+        winnerFound = false;
+        enemySpots = [];
+        yourSpots = [];
+        yourLastSpot = '';
+        enemyLastSpot = '';
+
+        for (i = 0; i < openBoardSpots.length; i++) {
+            $("#" + openBoardSpots[i]).find('img').attr({
+                src: 'assets/blankPiece.png'
+            })
+            $("#" + openBoardSpots[i]).removeClass();
+        }
+
         $('#gameReset').modal({
             backdrop: 'static',
             keyboard: false

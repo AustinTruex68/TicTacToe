@@ -140,9 +140,26 @@ a.removeAStuff:hover {
     padding: 10px;
 }
 
-.playAgainButts {
+.playAgainButts,
+#submitCharacterSelect {
     width: 90%;
-    height: 100px;
+    height: 150px;
+    line-height: 50px;
     font-family: preRock;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.socialIcons {
+    font-size: 6em;
+    padding-top: 30px;
+}
+
+.socialText {
+    font-size: 25px;
+    font-family: rock;
+    font-weight: bold;
+}
+
+.charPanel {
+    height: 782px;
 }
