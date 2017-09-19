@@ -83,7 +83,10 @@ $(document).ready(function() {
 
     //begin game
     var openBoardSpots = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
-    var winningCombos = [['a1', 'b1', 'c1'], ['a2', 'b2', 'c2']]
+    var winningCombos = [
+        ['a1', 'b1', 'c1'],
+        ['a2', 'b2', 'c2']
+    ]
     var spotsTaken = [];
     var yourSpots = [];
     var enemySpots = [];
@@ -133,14 +136,29 @@ $(document).ready(function() {
     };
 
     function checkForWinner() {
-        console.log(winningCombos);
-        console.log(yourSpots);
-        console.log(enemySpots);
-        for(var i =0; i < winningCombos.length; i ++){
-            // if ($.inArray(yourSpots, winningCombos)) {
-            //     console.log('your thingfhjernji');
-            // }
+        // console.log(winningCombos);
+        // console.log(yourSpots);
+        // console.log(enemySpots);
+        // var foundWinnerInYou = winningCombos[1].includes(yourSpots);
+        // console.log(yourSpots);
+        // console.log(winningCombos[1]);
+        // console.log(foundWinnerInYou);
+
+
+        for (var i = 0; i < yourSpots.length; i++) {
+            if (winningCombos[0].indexOf(yourSpots[i]) === -1) {
+                console.log("false");
+            } else {
+                console.log("tre");
+            }
         }
+
+
+        // for(var i =0; i < winningCombos.length; i ++){
+        //     if ($.inArray(yourSpots, winningCombos)) {
+        //         console.log();
+        //     }
+        // }
     };
 
 });
