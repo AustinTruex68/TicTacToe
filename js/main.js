@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var selectedCharacter = '';
     var enemyCharacter = '';
+    var selectedDifficulty = '';
     var turn = '';
     var cavemanPiece = "assets/cavemanPiece.png";
     var dinosaurPiece = "assets/dinoPiece.png";
@@ -22,15 +23,18 @@ $(document).ready(function() {
             $('#dinosaurSelected').first().children().removeClass('selectedCharacter');
             $(this).first().children().addClass('selectedCharacter');
             selectedCharacter = "caveman";
-            $("#submitCharacterSelect").removeClass('disabled');
+            $(".easyDifficulty").removeClass('disabled');
+            $(".hardDifficulty").removeClass('disabled');
         } else if (selectedCharacter === "caveman") {
             selectedCharacter = '';
             $('#caveManSelected').first().children().removeClass('selectedCharacter');
-            $("#submitCharacterSelect").addClass('disabled');
+            $(".easyDifficulty").addClass('disabled');
+            $(".hardDifficulty").addClass('disabled');
         } else {
             $(this).first().children().addClass('selectedCharacter');
             selectedCharacter = "caveman";
-            $("#submitCharacterSelect").removeClass('disabled');
+            $(".easyDifficulty").removeClass('disabled');
+            $(".hardDifficulty").removeClass('disabled');
         }
     });
 
@@ -44,44 +48,108 @@ $(document).ready(function() {
         } else if (selectedCharacter === "dinosaur") {
             selectedCharacter = '';
             $('#dinosaurSelected').first().children().removeClass('selectedCharacter');
-            $("#submitCharacterSelect").addClass('disabled');
+            $(".easyDifficulty").addClass('disabled');
+            $(".hardDifficulty").addClass('disabled');
         } else {
             $(this).first().children().addClass('selectedCharacter');
             selectedCharacter = "dinosaur";
-            $("#submitCharacterSelect").removeClass('disabled');
+            $(".easyDifficulty").removeClass('disabled');
+            $(".hardDifficulty").removeClass('disabled');
+        }
+    });
+
+    //difficulty buttons
+    $('.easyDifficulty').on('click', function() {
+        if ($(".easyDifficulty").hasClass('disabled')) {
+            swal({
+                title: "SELECT A CHARACTER & DIFFICULTY!",
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } else {
+            if (selectedDifficulty === "hard") {
+                selectedDifficulty = '';
+                $('.hardDifficulty').removeClass('selectedDifficulty');
+                $(this).addClass('selectedDifficulty');
+                selectedDifficulty = "easy";
+            } else if (selectedDifficulty === "easy") {
+                selectedDifficulty = '';
+                $('.easyDifficulty').removeClass('selectedDifficulty');
+                $("#submitCharacterSelect").addClass('disabled');
+            } else {
+                $(this).addClass('selectedDifficulty');
+                selectedDifficulty = "easy";
+                $("#submitCharacterSelect").removeClass('disabled');
+            }
+        }
+    });
+
+    $('.hardDifficulty').on('click', function() {
+        if ($(".hardDifficulty").hasClass('disabled')) {
+            swal({
+                title: "SELECT A CHARACTER & DIFFICULTY!",
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } else {
+            if (selectedDifficulty === "easy") {
+                selectedDifficulty = '';
+                $('.easyDifficulty').removeClass('selectedDifficulty');
+                $(this).addClass('selectedDifficulty');
+                selectedDifficulty = "hard";
+            } else if (selectedDifficulty === "hard") {
+                selectedDifficulty = '';
+                $('.hardDifficulty').removeClass('selectedDifficulty');
+                $("#submitCharacterSelect").addClass('disabled');
+            } else {
+                console.log($(this));
+                $(this).addClass('selectedDifficulty');
+                selectedDifficulty = "hard";
+                $("#submitCharacterSelect").removeClass('disabled');
+            }
         }
     });
 
     //submit selected char and enemy char info
     $("#submitCharacterSelect").on('click', function() {
-        if (selectedCharacter === "caveman") {
-            enemyCharacter = 'dinosaur';
+        if ($("#submitCharacterSelect").hasClass('disabled')) {
+            swal({
+                title: "SELECT A CHARACTER & DIFFICULTY!",
+                timer: 2000,
+                showConfirmButton: false
+            });
         } else {
-            enemyCharacter = 'caveman';
+            $('#teamSelect').modal('hide');
+
+            if (selectedCharacter === "caveman") {
+                enemyCharacter = 'dinosaur';
+            } else {
+                enemyCharacter = 'caveman';
+            }
+            //selected team
+            $("#yourTeamPic").attr({
+                src: 'assets/' + selectedCharacter + '.png'
+            });
+            $("#yourTeam").text(selectedCharacter.charAt(0).toUpperCase() + selectedCharacter.slice(1));
+
+            //enemy team
+            $("#enemyTeamPic").attr({
+                src: 'assets/' + enemyCharacter + '.png'
+            });
+            $("#enemyTeam").text(enemyCharacter.charAt(0).toUpperCase() + enemyCharacter.slice(1));
+
+            //turn set
+            $("#currentTurn").text(selectedCharacter);
+            $('#selectedDifficulty').text(selectedDifficulty);
+            turn = selectedCharacter;
+            yourTurnGo(turn);
+
+            swal({
+                title: "BEGIN THE BATTLE!",
+                timer: 1000,
+                showConfirmButton: false
+            });
         }
-        //selected team
-        $("#yourTeamPic").attr({
-            src: 'assets/' + selectedCharacter + '.png'
-        });
-        $("#yourTeam").text(selectedCharacter.charAt(0).toUpperCase() + selectedCharacter.slice(1));
-
-        //enemy team
-        $("#enemyTeamPic").attr({
-            src: 'assets/' + enemyCharacter + '.png'
-        });
-        $("#enemyTeam").text(enemyCharacter.charAt(0).toUpperCase() + enemyCharacter.slice(1));
-
-        //turn set
-        $("#currentTurn").text(selectedCharacter);
-        turn = selectedCharacter;
-        yourTurnGo(turn);
-
-        swal({
-            title: "BEGIN THE BATTLE!",
-            timer: 1000,
-            showConfirmButton: false
-
-        });
     });
 
     //begin game and handle game logic
@@ -157,6 +225,8 @@ $(document).ready(function() {
 
     //enemy will go in a random spot since I am not smart enough to make it more awesome
     function enemyTurnGo(turn, spotsTaken) {
+        console.log(selectedDifficulty);
+        // if (selectedDifficulty === 'easy') {
         var goHere = Math.floor(Math.random() * openBoardSpots.length);
         $("#" + openBoardSpots[goHere]).addClass(enemyCharacter + 'Taken');
         $("#" + openBoardSpots[goHere]).find('img').attr({
@@ -176,6 +246,35 @@ $(document).ready(function() {
         checkForEnemyWinner();
         checkForATie();
         yourTurnGo(turn);
+
+        // console.log(yourWinningComboStatus);
+        // var closeCombo = [];
+        for (var i = 0; i < yourWinningComboStatus.length; i++) {
+            if (yourWinningComboStatus[i] === 2) {
+                // console.log(winningCombos[i]);
+                // console.log(yourSpots);
+                for (var x = 0; x < yourSpots.length; x++) {
+                    if (yourSpots[x] === winningCombos[i][x]) {
+                        var comboHolder = winningCombos[i];
+                        for (var y = 0; y < winningCombos[i].length; y++) {
+                            if (!winningCombos[i][x].includes(comboHolder[y])) {
+                                console.log(enemySpots);
+                                console.log(comboHolder[y]);
+                                for (var t = 0; t < enemySpots.length; t++) {
+                                    if (enemySpots[t] !== comboHolder[y]) {
+                                        console.log("you should go =-" + comboHolder[y]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        // } else {
+
+        // }
     };
 
     //check if you won function

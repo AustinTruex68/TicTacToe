@@ -46,6 +46,8 @@
                     <div class="panel-body">
                         <h4 class="characterInfoHeaders text-center"><span id="currentTurn"></span>'s Turn</h4>
                         <br>
+                        <h5 class="text-center difficultyText"><strong>DIFFICULTY: <span id="selectedDifficulty">EASY</span></strong></h5>
+                        <br>
                         <br>
                         <div class="row">
                             <div class="col-xs-3">
@@ -92,30 +94,6 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- <div class="row infoSection">
-                            <div class="col-xs-6 text-center">
-                                <img style="margin: 0 auto;" id="yourTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
-                                <h3><strong>Team <span id="yourTeam">(Your team)</span></strong></h3>
-                                <hr>
-                                <ul>
-                                    <li>Moves: <span id="yourMoves">0</span></li>
-                                    <li>All Moves: <span id="yourAllTimeMoves">0</span></li>
-                                    <li>Wins: <span id="yourWins">0</span></li>
-                                    <li>Losses: <span id="yourLosses">0</span></li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-6 text-center">
-                                <img style="margin: 0 auto;" id="enemyTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
-                                <h3><strong>Team <span id="enemyTeam">(Their team)</span></strong></h3>
-                                <hr>
-                                <ul>
-                                    <li>Moves: <span id="enemyMoves">0</span></li>
-                                    <li>All Moves: <span id="enemyAllTimeMoves">0</span></li>
-                                    <li>Wins:<span id="enemyWins">0</span></li>
-                                    <li>Losses:<span id="enemyLosses">0</span></li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="panel-footer">
                         <br>
@@ -213,11 +191,19 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row difficultyCont">
+                        <div class="col-xs-6 text-center">
+                            <button class="btn btn-lg btn-success playAgainButts easyDifficulty disabled">EASY</button>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            <button class="btn btn-lg btn-danger playAgainButts hardDifficulty disabled">HARD</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-xs-12 text-center">
-                            <button type="button" class="btn btn-success disabled" id="submitCharacterSelect" data-dismiss="modal">SELECT!</button>
+                            <button type="button" class="btn btn-success disabled" id="submitCharacterSelect">SELECT!</button>
                         </div>
                     </div>
                 </div>
