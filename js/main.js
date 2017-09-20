@@ -105,6 +105,7 @@ $(document).ready(function() {
     //neutral data
     var spotsTaken = [];
     var winnerFound = false;
+    var catsWins = 0;
     //enemy stats and data
     var enemyWinningComboStatus = [0, 0, 0, 0, 0, 0, 0, 0];
     var enemySpots = [];
@@ -183,16 +184,22 @@ $(document).ready(function() {
             if (winningCombos[x].includes(yourLastSpot)) {
                 yourWinningComboStatus[x] = yourWinningComboStatus[x] + 1;
                 if (yourWinningComboStatus[x] === 3) {
-                    alert('YOU WON');
+                    // alert('YOU WON');
                     yourWins++;
                     $("#yourWins").text(yourWins);
                     yourMoves = 0;
                     enemyLosses++;
                     $("#enemyLosses").text(enemyLosses);
                     winnerFound = true;
-                    setTimeout(function() {
+
+                    $('#winnerModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    $("#winnerModal").modal('show');
+                    $(".winLoseNext").on('click', function() {
                         endGame();
-                    }, 2000);
+                    });
                 }
             }
         }
@@ -204,39 +211,66 @@ $(document).ready(function() {
             if (winningCombos[x].includes(enemyLastSpot)) {
                 enemyWinningComboStatus[x] = enemyWinningComboStatus[x] + 1;
                 if (enemyWinningComboStatus[x] === 3) {
-                    alert('ENEMY WON');
                     enemyWins++;
                     $("#enemyWins").text(enemyWins);
                     enemyMoves = 0;
                     yourLosses++;
                     $("#yourLosses").text(yourLosses);
                     winnerFound = true;
-                    setTimeout(function() {
+                    $('#loserModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    $("#loserModal").modal('show');
+                    $(".winLoseNext").on('click', function() {
                         endGame();
-                    }, 2000);
+                    });
 
                 }
             }
         }
     };
 
+    //check for cats game, show the cat wins if so
     function checkForATie() {
         if (openBoardSpots.length === 0 && winnerFound === false) {
             winnerFound = true;
-            alert('wow... the cat won.. really?');
             enemyMoves = 0;
             yourMoves = 0;
+            catsWins++;
+            $("#catsWins").text(catsWins);
+            $('#catsModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            clearGame();
+            $('#catsModal').modal('show');
+
         }
     }
 
     //stop game and reset if wanted
     function endGame() {
+        clearGame();
+        $('#gameReset').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $('#gameReset').modal('show');
+    }
+
+    // clear the game board and some stats
+    function clearGame() {
         openBoardSpots = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
+        yourWinningComboStatus = [0, 0, 0, 0, 0, 0, 0, 0];
+        enemyWinningComboStatus = [0, 0, 0, 0, 0, 0, 0, 0];
         winnerFound = false;
         enemySpots = [];
         yourSpots = [];
         yourLastSpot = '';
         enemyLastSpot = '';
+        spotsTaken = [];
 
         for (i = 0; i < openBoardSpots.length; i++) {
             $("#" + openBoardSpots[i]).find('img').attr({
@@ -244,11 +278,24 @@ $(document).ready(function() {
             })
             $("#" + openBoardSpots[i]).removeClass();
         }
-
-        $('#gameReset').modal({
-            backdrop: 'static',
-            keyboard: false
+        $(".playAgain").on('click', function() {
+            restartGame();
         });
-        $('#gameReset').modal('show');
+
+        $(".doNotPlayAgain").on('click', function() {
+            location.reload();
+        });
+    }
+
+    //restart the game
+    function restartGame() {
+        swal({
+            title: "BEGIN THE BATTLE!",
+            button: "Bring it on!"
+        });
+
+        $("#currentTurn").text(selectedCharacter);
+        turn = selectedCharacter;
+        yourTurnGo(turn);
     }
 });

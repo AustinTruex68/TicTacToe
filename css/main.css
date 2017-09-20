@@ -163,3 +163,11 @@ a.removeAStuff:hover {
 .charPanel {
     height: 782px;
 }
+
+.happy{
+    color: #7CE175;
+}
+
+.frown{
+    color: #DA3739;
+}
