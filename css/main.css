@@ -171,3 +171,13 @@ a.removeAStuff:hover {
 .frown{
     color: #DA3739;
 }
+
+.swal-title {
+    font-size: 25px;
+    font-family: rock;
+    font-weight: bold;
+}
+
+.swal-button {
+    display: none;
+}

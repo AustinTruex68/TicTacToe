@@ -78,8 +78,10 @@ $(document).ready(function() {
 
         swal({
             title: "BEGIN THE BATTLE!",
-            button: "Bring it on!"
-        })
+            timer: 1000,
+            showConfirmButton: false
+
+        });
     });
 
     //begin game and handle game logic
@@ -149,7 +151,7 @@ $(document).ready(function() {
                 if (winnerFound === false) {
                     setTimeout(function() {
                         enemyTurnGo(turn, spotsTaken);
-                    }, 2000);
+                    }, 1000);
                 }
             }
         });
@@ -188,6 +190,7 @@ $(document).ready(function() {
                     yourWins++;
                     $("#yourWins").text(yourWins);
                     yourMoves = 0;
+                    enemyMoves = 0;
                     enemyLosses++;
                     $("#enemyLosses").text(enemyLosses);
                     winnerFound = true;
@@ -214,6 +217,7 @@ $(document).ready(function() {
                     enemyWins++;
                     $("#enemyWins").text(enemyWins);
                     enemyMoves = 0;
+                    yourMoves = 0;
                     yourLosses++;
                     $("#yourLosses").text(yourLosses);
                     winnerFound = true;
@@ -291,7 +295,9 @@ $(document).ready(function() {
     function restartGame() {
         swal({
             title: "BEGIN THE BATTLE!",
-            button: "Bring it on!"
+            timer: 1000,
+            showConfirmButton: false
+
         });
 
         $("#currentTurn").text(selectedCharacter);
