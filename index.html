@@ -9,6 +9,17 @@
 </head>
 
 <body class="bg">
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center main-headline">
@@ -16,8 +27,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-2"></div>
-            <div class="col-xs-8">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
@@ -36,26 +47,52 @@
                         <h4 class="characterInfoHeaders text-center"><span id="currentTurn"></span>'s Turn</h4>
                         <br>
                         <br>
-                        <div id="playBoard">
-                            <table id="playTable">
-                                <tr id="gameRow1">
-                                    <td id="a1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                    <td id="a2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                    <td id="a3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                </tr>
-                                <tr id="gameRow2">
-                                    <td id="b1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                    <td id="b2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                    <td id="b3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                </tr>
-                                <tr id="gameRow3">
-                                    <td id="c1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                    <td id="c2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                    <td id="c3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
-                                </tr>
-                            </table>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img style="margin: 0 auto;" id="yourTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
+                                <h3 class="text-center"><strong>Team <span id="yourTeam">(Your team)</span></strong></h3>
+                                <hr>
+                                <ul>
+                                    <li><strong>Moves: <span id="yourMoves">0</span></strong></li>
+                                    <li><strong>All Moves: <span id="yourAllTimeMoves">0</span></strong></li>
+                                    <li><strong>Wins: <span id="yourWins">0</span></strong></li>
+                                    <li><strong>Losses: <span id="yourLosses">0</span></strong></li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6 text-center">
+                                <div id="playBoard">
+                                    <table id="playTable">
+                                        <tr id="gameRow1">
+                                            <td id="a1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                            <td id="a2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                            <td id="a3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                        </tr>
+                                        <tr id="gameRow2">
+                                            <td id="b1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                            <td id="b2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                            <td id="b3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                        </tr>
+                                        <tr id="gameRow3">
+                                            <td id="c1"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                            <td id="c2"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                            <td id="c3"><span class="gamePiece"><img src="assets/blankPiece.png" alt=""></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <img style="margin: 0 auto;" id="enemyTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
+                                <h3 class="text-center"><strong>Team <span id="enemyTeam">(Their team)</span></strong></h3>
+                                <hr>
+                                <ul>
+                                    <li><strong>Moves: <span id="enemyMoves">0</span></strong></li>
+                                    <li><strong>All Moves: <span id="enemyAllTimeMoves">0</span></strong></li>
+                                    <li><strong>Wins:<span id="enemyWins">0</span></strong></li>
+                                    <li><strong>Losses:<span id="enemyLosses">0</span></strong></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="row infoSection">
+                        <!-- <div class="row infoSection">
                             <div class="col-xs-6 text-center">
                                 <img style="margin: 0 auto;" id="yourTeamPic" src="https://placehold.it/100x100" class="img-responsive teamPics" alt="">
                                 <h3><strong>Team <span id="yourTeam">(Your team)</span></strong></h3>
@@ -78,7 +115,7 @@
                                     <li>Losses:<span id="enemyLosses">0</span></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="panel-footer">
                         <br>
@@ -93,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2"></div>
+            <div class="col-xs-1"></div>
         </div>
     </div>
     <!-- team select modal -->
@@ -210,7 +247,7 @@
                         </div>
                         <div class="col-xs-6 socialIcons text-center">
                             <p class="socialText">Share On Facebook:</p>
-                            <a href="https://github.com/AustinTruex68/TicTacToe"><i class="fa fa-facebook-official"></i></a>
+                            <div class="fb-share-button" data-href="http://atruexdevelopment.com/tictactoe" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fatruexdevelopment.com%2Ftictactoe&amp;src=sdkpreparse">Share</a></div>
                         </div>
                     </div>
                 </div>

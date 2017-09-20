@@ -120,8 +120,6 @@ $(document).ready(function() {
     //your turn
     function yourTurnGo(turn) {
         $("#playTable td").on('click', function() {
-            console.log($(this).hasClass('dinosaurTaken'));
-
             if (turn === selectedCharacter && !$(this).hasClass('dinosaurTaken') && !$(this).hasClass('cavemanTaken')) {
                 $(this).addClass(selectedCharacter + 'Taken');
                 $(this).find('img').attr({
@@ -201,7 +199,7 @@ $(document).ready(function() {
                     });
                     $("#winnerModal").modal('show');
                     $(".winLoseNext").on('click', function() {
-                        endGame();
+                        endGame(true);
                     });
                 }
             }
@@ -227,7 +225,7 @@ $(document).ready(function() {
                     });
                     $("#loserModal").modal('show');
                     $(".winLoseNext").on('click', function() {
-                        endGame();
+                        endGame(true);
                     });
 
                 }
@@ -238,30 +236,33 @@ $(document).ready(function() {
     //check for cats game, show the cat wins if so
     function checkForATie() {
         if (openBoardSpots.length === 0 && winnerFound === false) {
-            winnerFound = true;
             enemyMoves = 0;
             yourMoves = 0;
             catsWins++;
+            winnerFound = true;
             $("#catsWins").text(catsWins);
             $('#catsModal').modal({
                 backdrop: 'static',
                 keyboard: false
             });
 
-            clearGame();
+
             $('#catsModal').modal('show');
+            endGame(false);
 
         }
     }
 
     //stop game and reset if wanted
-    function endGame() {
+    function endGame(showReset) {
         clearGame();
-        $('#gameReset').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-        $('#gameReset').modal('show');
+        if (showReset) {
+            $('#gameReset').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#gameReset').modal('show');
+        }
     }
 
     // clear the game board and some stats
@@ -277,6 +278,7 @@ $(document).ready(function() {
         spotsTaken = [];
 
         for (i = 0; i < openBoardSpots.length; i++) {
+            console.log('in for loop of piece reset');
             $("#" + openBoardSpots[i]).find('img').attr({
                 src: 'assets/blankPiece.png'
             })
