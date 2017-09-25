@@ -84,31 +84,32 @@ $(document).ready(function() {
         }
     });
 
-    $('.hardDifficulty').on('click', function() {
-        if ($(".hardDifficulty").hasClass('disabled')) {
-            swal({
-                title: "SELECT A CHARACTER & DIFFICULTY!",
-                timer: 2000,
-                showConfirmButton: false
-            });
-        } else {
-            if (selectedDifficulty === "easy") {
-                selectedDifficulty = '';
-                $('.easyDifficulty').removeClass('selectedDifficulty');
-                $(this).addClass('selectedDifficulty');
-                selectedDifficulty = "hard";
-            } else if (selectedDifficulty === "hard") {
-                selectedDifficulty = '';
-                $('.hardDifficulty').removeClass('selectedDifficulty');
-                $("#submitCharacterSelect").addClass('disabled');
-            } else {
-                console.log($(this));
-                $(this).addClass('selectedDifficulty');
-                selectedDifficulty = "hard";
-                $("#submitCharacterSelect").removeClass('disabled');
-            }
-        }
-    });
+    // not yet supported
+    // $('.hardDifficulty').on('click', function() {
+    //     if ($(".hardDifficulty").hasClass('disabled')) {
+    //         swal({
+    //             title: "SELECT A CHARACTER & DIFFICULTY!",
+    //             timer: 2000,
+    //             showConfirmButton: false
+    //         });
+    //     } else {
+    //         if (selectedDifficulty === "easy") {
+    //             selectedDifficulty = '';
+    //             $('.easyDifficulty').removeClass('selectedDifficulty');
+    //             $(this).addClass('selectedDifficulty');
+    //             selectedDifficulty = "hard";
+    //         } else if (selectedDifficulty === "hard") {
+    //             selectedDifficulty = '';
+    //             $('.hardDifficulty').removeClass('selectedDifficulty');
+    //             $("#submitCharacterSelect").addClass('disabled');
+    //         } else {
+    //             console.log($(this));
+    //             $(this).addClass('selectedDifficulty');
+    //             selectedDifficulty = "hard";
+    //             $("#submitCharacterSelect").removeClass('disabled');
+    //         }
+    //     }
+    // });
 
     //submit selected char and enemy char info
     $("#submitCharacterSelect").on('click', function() {
